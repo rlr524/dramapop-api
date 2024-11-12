@@ -11,8 +11,8 @@ const app = express();
 
 app.listen(port, async () => {
     log.info(`App is running on port ${port}`);
-    
+
     await connect();
-    
-    routes(app)
-})
+
+    routes(app);
+});

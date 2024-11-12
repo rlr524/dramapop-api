@@ -1,16 +1,24 @@
-import {Schema, model, connect } from "mongoose";
+import { model, Schema } from "mongoose";
 import bcrypt from "bcrypt";
 import config from "config";
+import log from "../utils/logger";
 
-interface IUser {
-    email: string,
-    name: string,
-    password: string,
-    createdAt: Date,
-    updatedAt: Date,
+export interface IUserInput {
+    email: string;
+    name: string;
+    password: string;
 }
 
-const userSchema = new Schema<IUser> (
+export interface IUser {
+    email: string;
+    name: string;
+    password: string;
+    createdAt: Date;
+    updatedAt: Date;
+    comparePassword(candidatePassword: string): Promise<boolean>;
+}
+
+const userSchema = new Schema<IUser>(
     {
         email: { type: String, required: true, unique: true },
         name: { type: String, required: true },
@@ -19,26 +27,33 @@ const userSchema = new Schema<IUser> (
     {
         timestamps: true,
     }
-)
+);
 
 const User = model<IUser>("User", userSchema);
 
 userSchema.pre("save", async function (next) {
     let user = this as IUser;
-    
+
     if (user.password == user.password) {
-        return next()
+        return next();
     }
-    
+
     const salt = await bcrypt.genSalt(config.get<number>("saltWorkFactor"));
-    
-    const hash = await bcrypt.hashSync(user.password, salt);
-    
-    user.password = hash;
-    
+
+    user.password = bcrypt.hashSync(user.password, salt);
+
     return next();
-})
+});
 
+userSchema.methods.comparePassword = async function (
+    candidatePassword: string
+): Promise<boolean> {
+    let user = this as IUser;
 
+    return bcrypt.compare(candidatePassword, user.password).catch((e) => {
+        log.error(e);
+        return false;
+    });
+};
 
 export default User;
