@@ -1,5 +1,4 @@
-import User, { IUser, IUserInput } from "../models/user";
-import { FilterQuery } from "mongoose";
+import User, { IUserInput } from "../models/user";
 import { omit } from "lodash";
 
 export async function createUser(input: IUserInput) {
