@@ -20,7 +20,8 @@ type Drama struct {
 	Runtime   int32     `json:"runtime"`
 	Genres    []string  `json:"genres"` // TODO: Add slice of genres using Genre entity
 	Studio    string    `json:"studio"`
-	// TODO: Add slice of actors using Person entity
-	Deleted bool  `default:"false" json:"deleted"`
-	Version int32 `json:"version"`
+	Cast      []Person  `json:"cast"`
+	Crew      []Person  `json:"crew"`
+	Deleted   bool      `default:"false" json:"deleted"`
+	Version   int32     `json:"version"`
 }
