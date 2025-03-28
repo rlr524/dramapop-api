@@ -21,19 +21,19 @@ data class Drama (
     val name: String,
     
     @Column(name="year", nullable = true)
-    val year: Int,
+    val year: Int?,
     
     @Column(name="rating", nullable = true)
-    val rating: Int,
+    val rating: Int?,
     
     @Column(name="episodes", nullable = true)
-    val episodes: Int,
+    val episodes: Int?,
     
     @Column(name="start_date", nullable = true)
-    val startDate: LocalDate,
+    val startDate: LocalDate?,
     
     @Column(name="end_date", nullable = true)
-    val endDate: LocalDate,
+    val endDate: LocalDate?,
     
     @Column(name="deleted", nullable = false)
     val deleted: Boolean = false,
@@ -44,7 +44,7 @@ data class Drama (
         joinColumns = [JoinColumn(name="drama_id")],
         inverseJoinColumns = [JoinColumn(name="actor_id")]
     )
-    var cast: MutableSet<Actor> = mutableSetOf(),
+    var cast: MutableSet<Actor>? = mutableSetOf(),
 
     @ManyToMany
     @JoinTable(
@@ -52,7 +52,7 @@ data class Drama (
         joinColumns = [JoinColumn(name="drama_id")],
         inverseJoinColumns = [JoinColumn(name="staff_id")]
     )
-    var crew: MutableSet<Actor> = mutableSetOf(),
+    var crew: MutableSet<Staff>? = mutableSetOf(),
 
     @ManyToMany
     @JoinTable(
@@ -60,14 +60,14 @@ data class Drama (
     joinColumns = [JoinColumn(name="drama_id")],
     inverseJoinColumns = [JoinColumn(name="tag_id")]
 )
-    var tags: MutableSet<Tag> = mutableSetOf(),
+    var tags: MutableSet<Tag>? = mutableSetOf(),
     
     @ManyToOne
     @JoinColumn(name = "country_id", nullable = true)
-    val country: Country,
+    val country: Country?,
     
     @ManyToOne
     @JoinColumn(name = "genre_id", nullable = true)
-    val genre: Genre,
+    val genre: Genre?,
 )
 
