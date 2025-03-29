@@ -9,9 +9,12 @@ import jakarta.persistence.JoinColumn
 import jakarta.persistence.JoinTable
 import jakarta.persistence.ManyToMany
 import jakarta.persistence.ManyToOne
+import jakarta.persistence.Table
+import org.hibernate.proxy.HibernateProxy
 import java.time.LocalDate
 
 @Entity
+@Table(name = "dramas")
 data class Drama (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,5 +72,26 @@ data class Drama (
     @ManyToOne
     @JoinColumn(name = "genre_id", nullable = true)
     val genre: Genre?,
-)
+) {
+    final override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null) return false
+        val oEffectiveClass =
+            if (other is HibernateProxy) other.hibernateLazyInitializer.persistentClass else other.javaClass
+        val thisEffectiveClass =
+            if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass else this.javaClass
+        if (thisEffectiveClass != oEffectiveClass) return false
+        other as Drama
+
+        return dramaID != null && dramaID == other.dramaID
+    }
+
+    final override fun hashCode(): Int =
+        if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass.hashCode() else javaClass.hashCode()
+
+    @Override
+    override fun toString(): String {
+        return this::class.simpleName + "(  dramaID = $dramaID   ,   name = $name   ,   year = $year   ,   rating = $rating   ,   episodes = $episodes   ,   startDate = $startDate   ,   endDate = $endDate   ,   deleted = $deleted   ,   country = $country   ,   genre = $genre )"
+    }
+}
 

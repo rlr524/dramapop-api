@@ -1,7 +1,7 @@
 package com.emiyaconsulting.dramapopapi.controller
 
 import com.emiyaconsulting.dramapopapi.entity.Drama
-import com.emiyaconsulting.dramapopapi.repository.DramaRepository
+import com.emiyaconsulting.dramapopapi.service.DramaService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -14,43 +14,21 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/dramas")
-class DramaController(private val dramaRepository: DramaRepository) {
+class DramaController(private val dramaService: DramaService) {
     @GetMapping
-    fun getAllDramas(): List<Drama> = dramaRepository.findAll()
+    fun getAllDramas(): List<Drama> = dramaService.getAllDramas()
     
     @GetMapping("/{id}")
-    fun getDramaById(@PathVariable id: Long): ResponseEntity<Drama> = dramaRepository.findById(id).map { drama ->
-        ResponseEntity.ok(drama)
-    }.orElse(ResponseEntity.notFound().build())
+    fun getDramaById(@PathVariable id: Long): ResponseEntity<Drama> = dramaService.getDramaById(id)
     
     @PostMapping
-    fun createDrama(@RequestBody drama: Drama): Drama = dramaRepository.save(drama)
+    fun createDrama(@RequestBody drama: Drama): Drama = dramaService.createDrama(drama)
     
     @PutMapping("/{id}")
     fun updateDrama(@PathVariable id: Long, @RequestBody updatedDrama: Drama): ResponseEntity<Drama> = 
-        dramaRepository.findById(id).map { existingDrama -> 
-            val dramaToUpdate = existingDrama.copy(
-                name = updatedDrama.name,
-                year = updatedDrama.year,
-                rating = updatedDrama.rating,
-                episodes =  updatedDrama.episodes,
-                startDate = updatedDrama.startDate,
-                endDate = updatedDrama.endDate,
-                cast = updatedDrama.cast,
-                crew = updatedDrama.crew,
-                genre = updatedDrama.genre,
-                tags = updatedDrama.tags,
-                country = updatedDrama.country,
-            )
-            ResponseEntity.ok(dramaRepository.save(dramaToUpdate))
-        }.orElse(ResponseEntity.notFound().build())
+        dramaService.updateDrama(id, updatedDrama)
     
     @DeleteMapping("/{id}")
-    fun deleteDrama(@PathVariable id: Long, @RequestBody updatedDrama: Drama): ResponseEntity<Drama> =
-        dramaRepository.findById(id).map { existingDrama -> 
-            val dramaToUpdate = existingDrama.copy(
-                deleted = true,
-            )
-            ResponseEntity.ok(dramaRepository.save(dramaToUpdate))
-        }.orElse(ResponseEntity.notFound().build())
+    fun deleteDrama(@PathVariable id: Long, @RequestBody updatedDrama: Drama): ResponseEntity<Drama> = 
+        dramaService.deleteDrama(id, updatedDrama)
 }
