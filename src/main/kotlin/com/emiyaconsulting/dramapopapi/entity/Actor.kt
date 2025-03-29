@@ -14,11 +14,11 @@ data class Actor (
     val actorID: Long,
     
     @Column(name = "first_name", nullable = true)
-    val firstName: String,
+    val firstName: String?,
     
     @Column(name= "last_name", nullable = false)
     val lastName: String,
     
     @ManyToMany(mappedBy = "cast")
-    var dramas: MutableSet<Drama> = mutableSetOf()
+    var dramas: MutableSet<Drama>? = mutableSetOf()
 )

@@ -9,14 +9,14 @@ data class Staff (
     val staffID: Long,
 
     @Column(name = "first_name", nullable = true)
-    val firstName: String,
+    val firstName: String?,
 
     @Column(name= "last_name", nullable = false)
     val lastName: String,
     
     @Column(name="role", nullable = true)
-    val role: String,
+    val role: String?,
 
     @ManyToMany(mappedBy = "crew")
-    var dramas: MutableSet<Drama> = mutableSetOf()
+    var dramas: MutableSet<Drama>? = mutableSetOf()
 )

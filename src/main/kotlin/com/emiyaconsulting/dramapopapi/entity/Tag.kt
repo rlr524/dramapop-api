@@ -12,5 +12,5 @@ data class Tag (
     val name: String,
 
     @ManyToMany(mappedBy = "tags")
-    var dramas: MutableSet<Drama> = mutableSetOf()
+    var dramas: MutableSet<Drama>? = mutableSetOf()
 )
