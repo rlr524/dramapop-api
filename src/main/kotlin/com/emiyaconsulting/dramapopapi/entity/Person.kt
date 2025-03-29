@@ -1,28 +1,25 @@
 package com.emiyaconsulting.dramapopapi.entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.ManyToMany
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import org.hibernate.proxy.HibernateProxy
 
 @Entity
-@Table(name = "actors")
-data class Actor (
+@Table(name = "people")
+data class Person (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val actorID: Long,
-    
+    val personID: Long,
+
     @Column(name = "first_name", nullable = true)
     val firstName: String?,
-    
+
     @Column(name= "last_name", nullable = false)
     val lastName: String,
-    
-    @ManyToMany(mappedBy = "cast")
+
+    @Column(name="role", nullable = true)
+    val role: String?,
+
+    @ManyToMany(mappedBy = "crew")
     var dramas: MutableSet<Drama>? = mutableSetOf()
 ) {
     final override fun equals(other: Any?): Boolean {
@@ -33,9 +30,9 @@ data class Actor (
         val thisEffectiveClass =
             if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass else this.javaClass
         if (thisEffectiveClass != oEffectiveClass) return false
-        other as Actor
+        other as Person
 
-        return actorID != null && actorID == other.actorID
+        return personID != null && personID == other.personID
     }
 
     final override fun hashCode(): Int =
@@ -43,6 +40,6 @@ data class Actor (
 
     @Override
     override fun toString(): String {
-        return this::class.simpleName + "(  firstName = $firstName   ,   lastName = $lastName )"
+        return this::class.simpleName + "(  firstName = $firstName   ,   lastName = $lastName   ,   role = $role )"
     }
 }

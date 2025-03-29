@@ -51,11 +51,11 @@ data class Drama (
 
     @ManyToMany
     @JoinTable(
-        name = "dramas_staff",
+        name = "dramas_people",
         joinColumns = [JoinColumn(name="drama_id")],
-        inverseJoinColumns = [JoinColumn(name="staff_id")]
+        inverseJoinColumns = [JoinColumn(name="person_id")]
     )
-    var crew: MutableSet<Staff>? = mutableSetOf(),
+    var crew: MutableSet<Person>? = mutableSetOf(),
 
     @ManyToMany
     @JoinTable(
