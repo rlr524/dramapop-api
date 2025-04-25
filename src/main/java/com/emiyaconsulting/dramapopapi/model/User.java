@@ -14,26 +14,23 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
-public class Drama {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String title;
-    private String description;
-    private Integer year;
-    private Integer episodes;
-    private Double averageRating;
-    private String iconURL;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String pfpURL;
     @CreatedDate
     private LocalDateTime dateAdded;
     @LastModifiedDate
     private LocalDateTime dateModified;
 
-    public Drama(String title, String description, Integer year, Integer episodes, String iconURL) {
-        this.title = title;
-        this.description = description;
-        this.year = year;
-        this.episodes = episodes;
-        this.iconURL = iconURL;
+    public User(String firstName, String lastName, String email, String pfpURL) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.pfpURL = pfpURL;
     }
 }
