@@ -2,10 +2,10 @@ package com.emiyaconsulting.dramapopapi.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Objects;
 
 @Entity
@@ -16,17 +16,22 @@ public class Drama {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NonNull
+    @Column(name = "title", nullable = false)
     private String title;
+    @Column(name = "description")
     private String description;
+    @Column(name = "year")
     private Integer year;
+    @Column(name = "episodes")
     private Integer episodes;
+    @Column(name = "average_rating")
     private Double averageRating;
+    @Column(name = "icon_url")
     private String iconUrl;
-    @CreatedDate
-    private LocalDateTime dateAdded;
-    @LastModifiedDate
-    private LocalDateTime dateModified;
+    @Column(name = "date_added") @CreationTimestamp
+    private Instant dateAdded;
+    @Column(name = "date_modified") @UpdateTimestamp
+    private Instant dateModified;
 
     public Drama(@NonNull String title, String description, Integer year, Integer episodes, String iconURL) {
         this.title = title;
