@@ -26,13 +26,6 @@ public class User {
     @LastModifiedDate
     private LocalDateTime dateModified;
 
-    public User(String firstName, String lastName, @NonNull String email, String pfpUrl) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.pfpUrl = pfpUrl;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

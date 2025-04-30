@@ -23,10 +23,6 @@ public class Role {
     @LastModifiedDate
     private LocalDateTime dateModified;
 
-    public Role(@NonNull String name) {
-        this.name = name;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

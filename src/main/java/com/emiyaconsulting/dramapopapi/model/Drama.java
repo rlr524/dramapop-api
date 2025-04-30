@@ -33,14 +33,6 @@ public class Drama {
     @Column(name = "date_modified") @UpdateTimestamp
     private Instant dateModified;
 
-    public Drama(@NonNull String title, String description, Integer year, Integer episodes, String iconURL) {
-        this.title = title;
-        this.description = description;
-        this.year = year;
-        this.episodes = episodes;
-        this.iconUrl = iconURL;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
