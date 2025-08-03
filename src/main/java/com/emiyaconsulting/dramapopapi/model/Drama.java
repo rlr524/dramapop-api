@@ -16,6 +16,7 @@ public class Drama {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NonNull
     @Column(name = "title", nullable = false)
     private String title;
     @Column(name = "description")

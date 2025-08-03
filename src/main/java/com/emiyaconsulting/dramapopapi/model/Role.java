@@ -2,8 +2,8 @@ package com.emiyaconsulting.dramapopapi.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -17,10 +17,11 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NonNull
+    @Column(name = "name", nullable = false)
     private String name;
-    @CreatedDate
+    @Column(name = "date_added") @CreationTimestamp
     private LocalDateTime dateAdded;
-    @LastModifiedDate
+    @Column(name = "date_modified") @UpdateTimestamp
     private LocalDateTime dateModified;
 
     @Override

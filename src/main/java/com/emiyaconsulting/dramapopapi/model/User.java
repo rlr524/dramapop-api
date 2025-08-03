@@ -2,8 +2,8 @@ package com.emiyaconsulting.dramapopapi.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -16,14 +16,18 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
     @NonNull
+    @Column(name = "email", nullable = false)
     private String email;
+    @Column(name = "pfp_url")
     private String pfpUrl;
-    @CreatedDate
+    @Column(name = "date_added") @CreationTimestamp
     private LocalDateTime dateAdded;
-    @LastModifiedDate
+    @Column(name = "date_modified") @UpdateTimestamp
     private LocalDateTime dateModified;
 
     @Override
