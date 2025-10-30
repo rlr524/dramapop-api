@@ -6,7 +6,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Entity
 @Table(name = "role")
@@ -25,19 +24,18 @@ public class Role {
     private LocalDateTime dateModified;
 
     @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
+    public final boolean equals(Object o) {
+        if (!(o instanceof Role role)) return false;
 
-        Role role = (Role) o;
-        return Objects.equals(id, role.id) && name.equals(role.name) && Objects.equals(dateAdded, role.dateAdded) && Objects.equals(dateModified, role.dateModified);
+        return id.equals(role.id) && name.equals(role.name) && dateAdded.equals(role.dateAdded) && dateModified.equals(role.dateModified);
     }
 
     @Override
     public int hashCode() {
         int result = id.hashCode();
         result = 31 * result + name.hashCode();
-        result = 31 * result + Objects.hashCode(dateAdded);
-        result = 31 * result + Objects.hashCode(dateModified);
+        result = 31 * result + dateAdded.hashCode();
+        result = 31 * result + dateModified.hashCode();
         return result;
     }
 }
