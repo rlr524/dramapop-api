@@ -6,12 +6,13 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
+import java.util.Objects;
 
 @Entity
-@Table(name = "role")
+@Table(name = "country")
 @ToString
 @Getter @Setter @NoArgsConstructor
-public class Role {
+public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -25,18 +26,18 @@ public class Role {
 
     @Override
     public final boolean equals(Object o) {
-        if (!(o instanceof Role role)) return false;
+        if (!(o instanceof Country country)) return false;
 
-        return id.equals(role.id) && name.equals(role.name) && dateAdded.equals(role.dateAdded) 
-                && dateModified.equals(role.dateModified);
+        return Objects.equals(id, country.id) && name.equals(country.name)
+                && Objects.equals(dateAdded, country.dateAdded) && Objects.equals(dateModified, country.dateModified);
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
+        int result = Objects.hashCode(id);
         result = 31 * result + name.hashCode();
-        result = 31 * result + dateAdded.hashCode();
-        result = 31 * result + dateModified.hashCode();
+        result = 31 * result + Objects.hashCode(dateAdded);
+        result = 31 * result + Objects.hashCode(dateModified);
         return result;
     }
 }

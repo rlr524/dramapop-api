@@ -39,7 +39,10 @@ public class Drama {
         if (o == null || getClass() != o.getClass()) return false;
 
         Drama drama = (Drama) o;
-        return id.equals(drama.id) && title.equals(drama.title) && Objects.equals(description, drama.description) && Objects.equals(year, drama.year) && Objects.equals(episodes, drama.episodes) && Objects.equals(averageRating, drama.averageRating) && Objects.equals(iconUrl, drama.iconUrl) && dateAdded.equals(drama.dateAdded) && dateModified.equals(drama.dateModified);
+        return id.equals(drama.id) && title.equals(drama.title) && Objects.equals(description, drama.description) 
+                && Objects.equals(year, drama.year) && Objects.equals(episodes, drama.episodes) 
+                && Objects.equals(averageRating, drama.averageRating) && Objects.equals(iconUrl, drama.iconUrl) 
+                && dateAdded.equals(drama.dateAdded) && dateModified.equals(drama.dateModified);
     }
 
     @Override
