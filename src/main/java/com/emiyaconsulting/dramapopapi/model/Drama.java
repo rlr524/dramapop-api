@@ -29,6 +29,9 @@ public class Drama {
     private Double averageRating;
     @Column(name = "icon_url")
     private String iconUrl;
+    @ManyToOne
+    @JoinColumn(name = "countryId")
+    private Country origin;
     @Column(name = "date_added") @CreationTimestamp
     private Instant dateAdded;
     @Column(name = "date_modified") @UpdateTimestamp
