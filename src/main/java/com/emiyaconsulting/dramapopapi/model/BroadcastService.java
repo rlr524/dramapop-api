@@ -9,10 +9,10 @@ import java.time.Instant;
 import java.util.Objects;
 
 @Entity
-@Table(name = "service")
+@Table(name = "broadcast_service")
 @ToString
 @Getter @Setter @NoArgsConstructor
-public class Service {
+public class BroadcastService {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -26,7 +26,7 @@ public class Service {
 
     @Override
     public final boolean equals(Object o) {
-        if (!(o instanceof Service service)) return false;
+        if (!(o instanceof BroadcastService service)) return false;
 
         return Objects.equals(id, service.id) && name.equals(service.name) 
                 && Objects.equals(dateAdded, service.dateAdded) && Objects.equals(dateModified, service.dateModified);
