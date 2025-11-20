@@ -16,10 +16,13 @@ public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
+    @Column(name="rating", nullable = false)
+    private int rating;
     @NonNull
     @OneToOne
     @JoinColumn(name="drama_id")
     private Drama drama;
+    @NonNull
     @OneToOne
     @JoinColumn(name="user_id")
     private User user;
