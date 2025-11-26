@@ -51,6 +51,19 @@ public class Drama {
     @Column(name = "date_modified") @UpdateTimestamp
     private Instant dateModified;
 
+    public Drama(@NonNull String title, String description, Integer year, Integer episodes, String iconUrl) {
+        this.title = title;
+        this.description = description;
+        this.year = year;
+        this.episodes = episodes;
+        this.averageRating = 0.0;
+        this.iconUrl = iconUrl;
+        this.origin = null;
+        this.castCrew = null;
+        this.dateAdded = Instant.now();
+        this.dateModified = Instant.now();
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (!(o instanceof Drama drama)) return false;
