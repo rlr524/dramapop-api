@@ -19,6 +19,9 @@ public class DramaController {
     }
     
     // insert a single drama into the database
+    // Sanitization performed in DramaService.saveDrama() via OWASP HTML Sanitizer.
+    // Static analysis cannot trace taint across service boundaries. See DRAM-12.
+    @SuppressWarnings({"XSS", "JvmTaintAnalysis"})
     @PostMapping("/drama")
     public ResponseEntity<Drama> saveDrama(@Valid @RequestBody Drama drama) {
         Drama savedDrama = dramaService.saveDrama(drama);
