@@ -3,11 +3,15 @@ package com.emiyaconsulting.dramapopapi.service;
 import com.emiyaconsulting.dramapopapi.model.Drama;
 import com.emiyaconsulting.dramapopapi.repository.DramaRepository;
 import org.springframework.stereotype.Service;
+import org.owasp.html.PolicyFactory;
+import org.owasp.html.Sanitizers;
 
 import java.util.List;
 
 @Service
 public class DramaService {
+    private static final PolicyFactory SANITIZER = Sanitizers.FORMATTING.and(Sanitizers.LINKS);
+    
     private final DramaRepository dramaRepository;
 
     public DramaService(DramaRepository dramaRepository) {
@@ -15,6 +19,10 @@ public class DramaService {
     }
     
     public Drama saveDrama(Drama drama) {
+        drama.setTitle(SANITIZER.sanitize(drama.getTitle()));
+        if (drama.getDescription() != null) {
+            drama.setDescription(SANITIZER.sanitize(drama.getDescription()));
+        }
         return dramaRepository.save(drama);
     }
     

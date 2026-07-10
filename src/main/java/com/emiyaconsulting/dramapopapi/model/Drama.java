@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import jakarta.validation.constraints.NotBlank;
 
 import java.time.Instant;
 import java.util.HashSet;
@@ -12,14 +13,13 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "drama")
-@ToString
 @Getter @Setter @NoArgsConstructor
 public class Drama {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @NonNull
+    @NotBlank
     @Column(name = "title", nullable = false)
     private String title;
     
@@ -51,7 +51,7 @@ public class Drama {
     @Column(name = "date_modified") @UpdateTimestamp
     private Instant dateModified;
 
-    public Drama(@NonNull String title, String description, Integer year, Integer episodes, String iconUrl) {
+    public Drama(String title, String description, Integer year, Integer episodes, String iconUrl) {
         this.title = title;
         this.description = description;
         this.year = year;
