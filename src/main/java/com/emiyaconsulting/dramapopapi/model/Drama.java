@@ -13,6 +13,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "drama")
+@ToString
 @Getter @Setter @NoArgsConstructor
 public class Drama {
     @Id
@@ -39,9 +40,11 @@ public class Drama {
     private String iconUrl;
     
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(name = "countryId")
     private Country origin;
     
+    @ToString.Exclude
     @OneToMany(mappedBy = "drama", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<DramaPersonRole> castCrew = new HashSet<>();
     

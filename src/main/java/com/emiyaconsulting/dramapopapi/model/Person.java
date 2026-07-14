@@ -12,7 +12,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "person")
-@ToString
 @Getter @Setter @NoArgsConstructor
 public class Person {
     @Id

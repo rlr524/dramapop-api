@@ -10,7 +10,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "country")
-@ToString
 @Getter @Setter @NoArgsConstructor
 public class Country {
     @Id

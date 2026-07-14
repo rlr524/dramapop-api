@@ -10,7 +10,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "rating")
-@ToString
 @Getter @Setter @NoArgsConstructor
 public class Rating {
     @Id

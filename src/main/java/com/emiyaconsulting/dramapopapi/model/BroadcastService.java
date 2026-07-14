@@ -10,7 +10,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "broadcast_service")
-@ToString
 @Getter @Setter @NoArgsConstructor
 public class BroadcastService {
     @Id
