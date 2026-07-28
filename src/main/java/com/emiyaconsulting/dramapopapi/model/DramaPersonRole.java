@@ -10,6 +10,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "drama_person_role")
+@ToString
 @Getter @Setter @NoArgsConstructor
 public class DramaPersonRole {
     @EmbeddedId

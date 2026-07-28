@@ -2,6 +2,7 @@ package com.emiyaconsulting.dramapopapi.model;
 
 import java.util.Set;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -20,7 +21,7 @@ public class Drama {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @NotBlank
+    @NotNull
     @Column(name = "title", nullable = false)
     private String title;
     

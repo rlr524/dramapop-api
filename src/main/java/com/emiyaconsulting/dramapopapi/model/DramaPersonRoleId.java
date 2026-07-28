@@ -12,6 +12,7 @@ import java.util.Objects;
 @Embeddable
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class DramaPersonRoleId implements Serializable {
     private Long dramaId;

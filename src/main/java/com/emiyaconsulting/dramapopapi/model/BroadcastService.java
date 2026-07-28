@@ -1,6 +1,7 @@
 package com.emiyaconsulting.dramapopapi.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -10,12 +11,13 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "broadcast_service")
+@ToString
 @Getter @Setter @NoArgsConstructor
 public class BroadcastService {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NonNull
+    @NotNull
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "date_added") @CreationTimestamp

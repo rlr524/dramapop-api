@@ -1,6 +1,7 @@
 package com.emiyaconsulting.dramapopapi.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -19,14 +20,11 @@ public class User {
     @ToString.Exclude
     @Column(name = "first_name")
     private String firstName;
-    @ToString.Exclude
-    @Column(name = "last_name")
-    private String lastName;
-    @NonNull
+    @NotNull
     @ToString.Exclude
     @Column(name = "email", nullable = false)
     private String email;
-    @NonNull
+    @NotNull
     @ToString.Exclude
     @Column(name = "password", nullable = false)
     private String password;
@@ -48,14 +46,15 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
 
         User user = (User) o;
-        return id.equals(user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && email.equals(user.email) && Objects.equals(pfpUrl, user.pfpUrl) && dateAdded.equals(user.dateAdded) && dateModified.equals(user.dateModified);
+        return id.equals(user.id) && Objects.equals(firstName, user.firstName) 
+                && email.equals(user.email) && Objects.equals(pfpUrl, user.pfpUrl) 
+                && dateAdded.equals(user.dateAdded) && dateModified.equals(user.dateModified);
     }
 
     @Override
     public int hashCode() {
         int result = id.hashCode();
         result = 31 * result + Objects.hashCode(firstName);
-        result = 31 * result + Objects.hashCode(lastName);
         result = 31 * result + email.hashCode();
         result = 31 * result + Objects.hashCode(pfpUrl);
         result = 31 * result + dateAdded.hashCode();

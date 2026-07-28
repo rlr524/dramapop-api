@@ -1,6 +1,7 @@
 package com.emiyaconsulting.dramapopapi.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -12,16 +13,18 @@ import java.util.Set;
 
 @Entity
 @Table(name = "role")
+@ToString
 @Getter @Setter @NoArgsConstructor
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @NonNull
+    @NotNull
     @Column(name = "name", nullable = false)
     private String name;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<DramaPersonRole> castCrew = new HashSet<>();
     

@@ -1,6 +1,7 @@
 package com.emiyaconsulting.dramapopapi.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -10,18 +11,20 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "rating")
+@ToString
 @Getter @Setter @NoArgsConstructor
 public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
+    @NotNull
     @Column(name="rating", nullable = false)
     private int rating;
-    @NonNull
+    @NotNull
     @OneToOne
     @JoinColumn(name="drama_id")
     private Drama drama;
-    @NonNull
+    @NotNull
     @OneToOne
     @JoinColumn(name="user_id")
     private User user;
