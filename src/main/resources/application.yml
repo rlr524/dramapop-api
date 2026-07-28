@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: dramapop-api
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST_DP:lancer}:3306/dramapop?serverTimezone=UTC&useLegacyDatetimeCode=false
+    username: ${MYSQL_USERNAME_DP}
+    password: ${MYSQL_PASSWORD_DP}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: true

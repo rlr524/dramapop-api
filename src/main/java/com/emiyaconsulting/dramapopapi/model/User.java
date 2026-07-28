@@ -5,7 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Objects;
 
 @Entity
@@ -16,19 +16,32 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @ToString.Exclude
     @Column(name = "first_name")
     private String firstName;
+    @ToString.Exclude
     @Column(name = "last_name")
     private String lastName;
     @NonNull
+    @ToString.Exclude
     @Column(name = "email", nullable = false)
     private String email;
+    @NonNull
+    @ToString.Exclude
+    @Column(name = "password", nullable = false)
+    private String password;
     @Column(name = "pfp_url")
     private String pfpUrl;
-    @Column(name = "date_added") @CreationTimestamp
-    private LocalDateTime dateAdded;
+    @Column(name = "active")
+    private boolean active;
+    @Column(name = "deleted")
+    private boolean deleted;
+    @Column(name = "date_deleted", updatable = false)
+    private Instant dateDeleted;
+    @Column(name = "date_added", nullable = false, updatable = false) @CreationTimestamp
+    private Instant dateAdded;
     @Column(name = "date_modified") @UpdateTimestamp
-    private LocalDateTime dateModified;
+    private Instant dateModified;
 
     @Override
     public boolean equals(Object o) {
