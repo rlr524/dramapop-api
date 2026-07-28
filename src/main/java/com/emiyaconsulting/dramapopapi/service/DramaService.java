@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 import org.owasp.html.PolicyFactory;
 import org.owasp.html.Sanitizers;
 
-import java.util.List;
-
 @Service
 public class DramaService {
     private static final PolicyFactory SANITIZER = Sanitizers.FORMATTING.and(Sanitizers.LINKS);
@@ -19,7 +17,9 @@ public class DramaService {
     }
     
     public Drama saveDrama(Drama drama) {
-        drama.setTitle(SANITIZER.sanitize(drama.getTitle()));
+        if (drama.getTitle() != null) {
+            drama.setTitle(SANITIZER.sanitize(drama.getTitle()));
+        }
         if (drama.getDescription() != null) {
             drama.setDescription(SANITIZER.sanitize(drama.getDescription()));
         }
