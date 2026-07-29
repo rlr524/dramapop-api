@@ -16,35 +16,31 @@ public class DramaPersonRole {
     @EmbeddedId
     private DramaPersonRoleId id; // Composite primary key
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("dramaId") // Maps the dramaId from the embedded ID
     @JoinColumn(name = "drama_id")
     private Drama drama;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("personId") // Maps the personId from the embedded ID
     @JoinColumn(name = "person_id")
     private Person person;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("roleId") // Maps the roleId from the embedded ID
     @JoinColumn(name = "role_id")
     private Role role;
 
     @Override
     public final boolean equals(Object o) {
+        if (this == o) return true;
         if (!(o instanceof DramaPersonRole that)) return false;
 
-        return Objects.equals(id, that.id) && Objects.equals(drama, that.drama) 
-                && Objects.equals(person, that.person) && Objects.equals(role, that.role);
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override
-    public int hashCode() {
-        int result = Objects.hashCode(id);
-        result = 31 * result + Objects.hashCode(drama);
-        result = 31 * result + Objects.hashCode(person);
-        result = 31 * result + Objects.hashCode(role);
-        return result;
+    public final int hashCode() {
+        return getClass().hashCode();
     }
 }

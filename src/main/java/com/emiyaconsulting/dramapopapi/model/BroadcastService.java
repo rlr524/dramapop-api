@@ -27,18 +27,14 @@ public class BroadcastService {
 
     @Override
     public final boolean equals(Object o) {
+        if (this == o) return true;
         if (!(o instanceof BroadcastService service)) return false;
 
-        return Objects.equals(id, service.id) && name.equals(service.name) 
-                && Objects.equals(dateAdded, service.dateAdded) && Objects.equals(dateModified, service.dateModified);
+        return id != null && Objects.equals(id, service.id);
     }
 
     @Override
-    public int hashCode() {
-        int result = Objects.hashCode(id);
-        result = 31 * result + name.hashCode();
-        result = 31 * result + Objects.hashCode(dateAdded);
-        result = 31 * result + Objects.hashCode(dateModified);
-        return result;
+    public final int hashCode() {
+        return getClass().hashCode();
     }
 }

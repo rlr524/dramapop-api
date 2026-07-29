@@ -40,9 +40,9 @@ public class Drama {
     @Column(name = "icon_url")
     private String iconUrl;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @ToString.Exclude
-    @JoinColumn(name = "countryId")
+    @JoinColumn(name = "country_id")
     private Country origin;
     
     @ToString.Exclude
@@ -70,29 +70,14 @@ public class Drama {
 
     @Override
     public final boolean equals(Object o) {
+        if (this == o) return true;
         if (!(o instanceof Drama drama)) return false;
 
-        return Objects.equals(id, drama.id) && title.equals(drama.title) 
-                && Objects.equals(description, drama.description) && Objects.equals(year, drama.year) 
-                && Objects.equals(episodes, drama.episodes) && Objects.equals(averageRating, drama.averageRating) 
-                && Objects.equals(iconUrl, drama.iconUrl) && Objects.equals(origin, drama.origin) 
-                && Objects.equals(castCrew, drama.castCrew) && Objects.equals(dateAdded, drama.dateAdded) 
-                && Objects.equals(dateModified, drama.dateModified);
+        return id != null && Objects.equals(id, drama.id);
     }
 
     @Override
-    public int hashCode() {
-        int result = Objects.hashCode(id);
-        result = 31 * result + title.hashCode();
-        result = 31 * result + Objects.hashCode(description);
-        result = 31 * result + Objects.hashCode(year);
-        result = 31 * result + Objects.hashCode(episodes);
-        result = 31 * result + Objects.hashCode(averageRating);
-        result = 31 * result + Objects.hashCode(iconUrl);
-        result = 31 * result + Objects.hashCode(origin);
-        result = 31 * result + Objects.hashCode(castCrew);
-        result = 31 * result + Objects.hashCode(dateAdded);
-        result = 31 * result + Objects.hashCode(dateModified);
-        return result;
+    public final int hashCode() {
+        return getClass().hashCode();
     }
 }

@@ -10,22 +10,24 @@ import java.time.Instant;
 import java.util.Objects;
 
 @Entity
-@Table(name = "rating")
+@Table(name = "rating", uniqueConstraints = @UniqueConstraint(columnNames = {"drama_id", "user_id"}))
 @ToString
 @Getter @Setter @NoArgsConstructor
 public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+    private Long id;
     @NotNull
     @Column(name="rating", nullable = false)
-    private int rating;
+    private Integer rating;
     @NotNull
-    @OneToOne
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="drama_id")
     private Drama drama;
     @NotNull
-    @OneToOne
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User user;
     @Column(name = "date_added") @CreationTimestamp
@@ -35,21 +37,14 @@ public class Rating {
 
     @Override
     public final boolean equals(Object o) {
-        if (!(o instanceof Rating rating)) return false;
+        if (this == o) return true;
+        if (!(o instanceof Rating that)) return false;
 
-        return Objects.equals(Id, rating.Id) && drama.equals(rating.drama) 
-                && Objects.equals(user, rating.user) 
-                && Objects.equals(dateAdded, rating.dateAdded) 
-                && Objects.equals(dateModified, rating.dateModified);
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override
-    public int hashCode() {
-        int result = Objects.hashCode(Id);
-        result = 31 * result + drama.hashCode();
-        result = 31 * result + Objects.hashCode(user);
-        result = 31 * result + Objects.hashCode(dateAdded);
-        result = 31 * result + Objects.hashCode(dateModified);
-        return result;
+    public final int hashCode() {
+        return getClass().hashCode();
     }
 }

@@ -34,7 +34,7 @@ public class User {
     private boolean active;
     @Column(name = "deleted")
     private boolean deleted;
-    @Column(name = "date_deleted", updatable = false)
+    @Column(name = "date_deleted")
     private Instant dateDeleted;
     @Column(name = "date_added", nullable = false, updatable = false) @CreationTimestamp
     private Instant dateAdded;
@@ -42,23 +42,15 @@ public class User {
     private Instant dateModified;
 
     @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User user)) return false;
 
-        User user = (User) o;
-        return id.equals(user.id) && Objects.equals(firstName, user.firstName) 
-                && email.equals(user.email) && Objects.equals(pfpUrl, user.pfpUrl) 
-                && dateAdded.equals(user.dateAdded) && dateModified.equals(user.dateModified);
+        return id != null && Objects.equals(id, user.id);
     }
 
     @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + Objects.hashCode(firstName);
-        result = 31 * result + email.hashCode();
-        result = 31 * result + Objects.hashCode(pfpUrl);
-        result = 31 * result + dateAdded.hashCode();
-        result = 31 * result + dateModified.hashCode();
-        return result;
+    public final int hashCode() {
+        return getClass().hashCode();
     }
 }

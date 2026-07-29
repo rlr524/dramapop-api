@@ -36,19 +36,14 @@ public class Role {
 
     @Override
     public final boolean equals(Object o) {
+        if (this == o) return true;
         if (!(o instanceof Role role)) return false;
 
-        return Objects.equals(id, role.id) && name.equals(role.name) && Objects.equals(castCrew, role.castCrew) 
-                && Objects.equals(dateAdded, role.dateAdded) && Objects.equals(dateModified, role.dateModified);
+        return id != null && Objects.equals(id, role.id);
     }
 
     @Override
-    public int hashCode() {
-        int result = Objects.hashCode(id);
-        result = 31 * result + name.hashCode();
-        result = 31 * result + Objects.hashCode(castCrew);
-        result = 31 * result + Objects.hashCode(dateAdded);
-        result = 31 * result + Objects.hashCode(dateModified);
-        return result;
+    public final int hashCode() {
+        return getClass().hashCode();
     }
 }

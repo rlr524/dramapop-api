@@ -6,7 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -35,31 +35,22 @@ public class Person {
     private Set<DramaPersonRole> castCrew = new HashSet<>();
     
     @Column(name = "date_added") @CreationTimestamp
-    private LocalDateTime dateAdded;
-    
+    private Instant dateAdded;
+
     @Column(name = "date_modified") @UpdateTimestamp
-    private LocalDateTime dateModified;
+    private Instant dateModified;
 
     @Override
     public final boolean equals(Object o) {
+        if (this == o) return true;
         if (!(o instanceof Person person)) return false;
 
-        return Objects.equals(id, person.id) && Objects.equals(firstName, person.firstName) 
-                && Objects.equals(lastName, person.lastName) && Objects.equals(pfpUrl, person.pfpUrl) 
-                && Objects.equals(castCrew, person.castCrew) && Objects.equals(dateAdded, person.dateAdded) 
-                && Objects.equals(dateModified, person.dateModified);
+        return id != null && Objects.equals(id, person.id);
     }
 
     @Override
-    public int hashCode() {
-        int result = Objects.hashCode(id);
-        result = 31 * result + Objects.hashCode(firstName);
-        result = 31 * result + Objects.hashCode(lastName);
-        result = 31 * result + Objects.hashCode(pfpUrl);
-        result = 31 * result + Objects.hashCode(castCrew);
-        result = 31 * result + Objects.hashCode(dateAdded);
-        result = 31 * result + Objects.hashCode(dateModified);
-        return result;
+    public final int hashCode() {
+        return getClass().hashCode();
     }
 }
 

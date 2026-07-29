@@ -16,14 +16,14 @@ import java.util.Objects;
 @Getter @Setter @NoArgsConstructor
 public class Genre {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "name", nullable = false)
     @NotNull
     private String name;
     @Column(name = "deleted")
     private boolean deleted;
-    @Column(name = "date_deleted", updatable = false)
+    @Column(name = "date_deleted")
     private Instant dateDeleted;
     @Column(name = "date_added", nullable = false, updatable = false) @CreationTimestamp
     private Instant dateAdded;
@@ -32,19 +32,14 @@ public class Genre {
 
     @Override
     public final boolean equals(Object o) {
+        if (this == o) return true;
         if (!(o instanceof Genre genre)) return false;
 
-        return deleted == genre.deleted && id.equals(genre.id) && name.equals(genre.name) && Objects.equals(dateDeleted, genre.dateDeleted) && dateAdded.equals(genre.dateAdded) && dateModified.equals(genre.dateModified);
+        return id != null && Objects.equals(id, genre.id);
     }
 
     @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + Boolean.hashCode(deleted);
-        result = 31 * result + Objects.hashCode(dateDeleted);
-        result = 31 * result + dateAdded.hashCode();
-        result = 31 * result + dateModified.hashCode();
-        return result;
+    public final int hashCode() {
+        return getClass().hashCode();
     }
 }

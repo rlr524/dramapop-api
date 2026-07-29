@@ -27,18 +27,14 @@ public class Country {
 
     @Override
     public final boolean equals(Object o) {
+        if (this == o) return true;
         if (!(o instanceof Country country)) return false;
 
-        return Objects.equals(id, country.id) && name.equals(country.name)
-                && Objects.equals(dateAdded, country.dateAdded) && Objects.equals(dateModified, country.dateModified);
+        return id != null && Objects.equals(id, country.id);
     }
 
     @Override
-    public int hashCode() {
-        int result = Objects.hashCode(id);
-        result = 31 * result + name.hashCode();
-        result = 31 * result + Objects.hashCode(dateAdded);
-        result = 31 * result + Objects.hashCode(dateModified);
-        return result;
+    public final int hashCode() {
+        return getClass().hashCode();
     }
 }
