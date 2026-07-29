@@ -15,7 +15,7 @@ import java.util.Objects;
 @Getter @Setter @NoArgsConstructor
 public class Rating {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
     @Column(name="rating", nullable = false)

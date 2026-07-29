@@ -15,7 +15,7 @@ import java.util.Objects;
 @Getter @Setter @NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ToString.Exclude
     @Column(name = "first_name")

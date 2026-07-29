@@ -15,7 +15,7 @@ import java.util.Objects;
 @Getter @Setter @NoArgsConstructor
 public class Country {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
     @Column(name = "name", nullable = false)
